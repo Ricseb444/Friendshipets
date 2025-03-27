@@ -14,7 +14,7 @@
                             <!-- Imagen del producto -->
                             @if (!string.IsNullOrEmpty(producto.ImgProducto))
                             {
-                                <img class="card-img-top" src="~/Content/Images/@Url.Content(producto.ImgProducto)" alt="@producto.NombreProducto" />
+                                <img class="card-img-top" src="@Url.Content(producto.ImgProducto)" alt="@producto.NombreProducto" />
                             }
                             else
                             {
