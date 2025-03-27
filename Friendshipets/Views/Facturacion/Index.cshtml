@@ -1,0 +1,79 @@
+﻿@model List<Friendshipets.Models.ViewModels.cListaFacturas>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Administración</a></li>
+    <li class="breadcrumb-item active">Facturas</li>
+</ol>
+
+<div class="card shadow-lg">
+    <div class="card-header">
+        <i class="fas fa-credit-card me-1"></i> Lista de Facturas
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-success" onclick="document.location.href = '@Url.Content("~/Facturacion/Create")'">Crear Nuevo</button>
+                <hr />
+                <table id="tabla" class="display cell-border" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th><div>ID Factura</div></th>
+                            <th><div>ID Cliente</div></th>
+                            <th><div>Monto Total</div></th>
+                            <th><div>Nombre Cliente</div></th>
+                            <th><div>Apellidos Cliente</div></th>
+                            <th><div>Fecha</div></th>
+                            <th><div>Cantidad Productos</div></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var fila in Model)
+                        {
+                            <tr>
+                                <td>@fila.IDFactura</td>
+                                <td>@fila.IDCliente</td>
+                                <td>@fila.MontoTotal</td>
+                                <td>@fila.NombreCliente</td>
+                                <td>@fila.ApellidosCliente</td>
+                                <td>@fila.FechaFactura</td>
+                                <td>@fila.CantidadProductos</td>
+                                <td><input type="button" value="Consultar" class="btn btn-success" onclick="window.location.href='@Url.Content("~/Facturacion/Details/" + fila.IDFactura)'" /></td>
+                                <td><input type="button" value="Editar" class="btn btn-primary" onclick="window.location.href='@Url.Content("~/Facturacion/Edit/" + fila.IDFactura)'" /></td>
+                                <td><input type="button" value="Eliminar" class="btn btn-danger" onclick="window.location.href='@Url.Content("~/Facturacion/Delete/" + fila.IDFactura)'" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tabla').DataTable({
+                responsive: true,
+                columnDefs: [//Esto es para que la tabla no orderne los registros por la columna en la que están los botones
+                    {
+                        "targets": [7, 8, 9],
+                        "orderable": false,
+                        "searchable": false
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.2.2/i18n/es-ES.json',
+                },
+            });
+        });
+    </script>
+}

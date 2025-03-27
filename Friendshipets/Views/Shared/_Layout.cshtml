@@ -1,0 +1,95 @@
+﻿@{
+    var rol = Session["RolUsuario"] as string;
+    var nombreUsuario = Session["NombreUsuario"] as string;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Friendshipet's</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+
+        <a class="navbar-brand ps-3" href="@Url.Action("Index","Home")">Friendshipet's</a>
+
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Resumen</div>
+                        <a class="nav-link" href="@Url.Action("Index","Home")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                            Inicio
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Index","Clientes")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
+                            Clientes
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Index","Usuarios")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Usuarios
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading">Mantenimiento</div>
+
+                        <a class="nav-link" href="@Url.Action("Index","Proveedores")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-bookmark"></i></div>
+                            Proveedores
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Index","Productos")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
+                            Productos
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Index","Carrito")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                            Carritos
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Index","Facturacion")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-credit-card"></i></div>
+                            Facturación
+                        </a>
+                        <a class="nav-link" action="@Url.Action("Logout", "Auth")" onclick="return confirm('¿Estás seguro de que quieres salir?');">
+                            <div class="sb-nav-link-icon"><i class="fas fa-door-open"></i></div>
+                            Salir
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Inicio sesión como:</div>
+                    @nombreUsuario
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    @RenderBody()
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Friendshipet's @DateTime.Now.Year</div>
+                        <div>
+                            <a href="#">Políticas de Privacidad</a>
+                            &middot;
+                            <a href="#">Terminos &amp; Condiciones</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/complementos")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

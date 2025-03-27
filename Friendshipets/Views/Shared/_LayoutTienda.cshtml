@@ -1,0 +1,103 @@
+﻿@{
+    var rol = Session["RolUsuario"] as string;
+    var nombreUsuario = Session["NombreUsuario"] as string;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Friendshipets</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/Content/styles.css" rel="stylesheet" />
+    <link href="~/Content/css_header.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="color_header py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center">
+                <img src="~/Content/assets/Logo_Friendshipets.png" alt="Logo">
+            </div>
+        </div>
+    </header>
+
+    <nav id="nav" class="navbar navbar-expand-lg">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="@Url.Action("Index", "Tienda")">Inicio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Catalogo", "Catalogo")">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Contacto", "Home")">Contáctenos</a>
+                    </li>
+
+                    @if (rol == "CLIENTE")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "MiPerfil")">Mi Perfil</a>
+                        </li>
+                    }
+                </ul>
+
+                @if (rol == "CLIENTE")
+                {
+                    <form class="d-flex" action="@Url.Action("Index", "Carrito")" method="get">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Carrito
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
+                }
+
+                @if (string.IsNullOrEmpty(rol))
+                {
+                    <form class="d-flex" action="@Url.Action("Login", "Auth")" method="get">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi bi-file-person-fill"></i>
+                            Iniciar Sesión
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form class="d-flex" action="@Url.Action("Logout", "Auth")" method="post">
+                        <span class="me-2">Hola, @nombreUsuario</span>
+                        <button class="btn btn-outline-dark" type="submit">Cerrar Sesión</button>
+                    </form>
+                }
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid px-4">
+        @RenderBody()
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="m-0 text-center text-black">Copyright &copy; Friendshipets 2025</p>
+        </div>
+    </footer>
+
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="js/scripts.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/complementos")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

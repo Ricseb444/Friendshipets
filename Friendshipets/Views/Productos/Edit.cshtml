@@ -1,0 +1,137 @@
+﻿@model Friendshipets.Models.ViewModels.editProducto
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <ol class="breadcrumb mb-4 mt-4">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index","Productos")">Productos</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+
+    @if (ViewBag.ValorMensaje != null)
+    {
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title"><i class="bi bi-info-circle"></i> Mensaje</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if (ViewBag.ValorMensaje == 1)
+                        {
+                            <div class="alert alert-success">@ViewBag.MensajeProceso</div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-danger">@ViewBag.MensajeProceso</div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("Edit", "Productos", FormMethod.Post))
+    {
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <i class="fas fa-edit me-1"></i> Editar Producto
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 d-flex flex-column align-self-start">
+                        <button type="submit" class="btn btn-primary w-100 btn-lg mb-3">
+                            Editar Producto
+                        </button>
+                        <button type="button" class="btn btn-success w-100 btn-lg" onclick="document.location.href = '@Url.Content("~/Productos/Index")'">
+                            Volver
+                        </button>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group row mb-3">
+                            <label class="col-md-4 col-form-label text-md-right">
+                                @Html.HiddenFor(u => u.IDProducto)
+                                @Html.LabelFor(u => u.NombreProducto):
+                            </label>
+                            <div class="col-md-8 input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                @Html.TextBoxFor(u => u.NombreProducto, new { @class = "form-control", @placeholder = "Ingrese nombre producto", autocomplete = "off" })
+                            </div>
+                            <small class="text-danger">@Html.ValidationMessage("NombreProducto")</small>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label class="col-md-4 col-form-label text-md-right">
+                                @Html.LabelFor(u => u.NombreProveedor):
+                            </label>
+                            <div class="col-md-8 input-group">
+                                <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                @Html.TextBoxFor(u => u.NombreProveedor, new { @class = "form-control", @placeholder = "Ingrese nombre proveedor", autocomplete = "off" })
+                            </div>
+                            <small class="text-danger">@Html.ValidationMessage("NombreProveedor")</small>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label class="col-md-4 col-form-label text-md-right">
+                                @Html.LabelFor(u => u.Categoria):
+                            </label>
+                            <div class="col-md-8 input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                @Html.DropDownListFor(u => u.Categoria, new List<SelectListItem>
+                                {
+                                    new SelectListItem() { Text = "Alimento Perro", Value = "Alimento Perro"},
+                                    new SelectListItem() { Text = "Juguetes Perro", Value = "Juguetes Perro"},
+                                    new SelectListItem() { Text = "Alimento Gato", Value = "Alimento Gato"},
+                                    new SelectListItem() { Text = "Juguetes Gato", Value = "Juguetes Gato"},
+                                    new SelectListItem() { Text = "Higiene Perro", Value = "Higiene Perro"},
+                                    new SelectListItem() { Text = "Higiene Gato", Value = "Higiene Gato"},
+                                    new SelectListItem() { Text = "Premios Perro", Value = "Premios Perro"},
+                                    new SelectListItem() { Text = "Premios Gato", Value = "Premios Gato"}
+                                }, new { @class = "form-control" })
+                            </div>
+                            <small class="text-danger">@Html.ValidationMessage("Categoria")</small>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label class="col-md-4 col-form-label text-md-right">
+                                @Html.LabelFor(u => u.Stock):
+                            </label>
+                            <div class="col-md-8 input-group">
+                                <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                @Html.TextBoxFor(u => u.Stock, new { @class = "form-control", @placeholder = "Ingrese stock producto", autocomplete = "off" })
+                            </div>
+                            <small class="text-danger">@Html.ValidationMessage("Stock")</small>
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label class="col-md-4 col-form-label text-md-right">
+                                @Html.LabelFor(u => u.Precio):
+                            </label>
+                            <div class="col-md-8 input-group">
+                                <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                @Html.TextBoxFor(u => u.Precio, new { @class = "form-control", @placeholder = "Ingrese precio producto", autocomplete = "off" })
+                            </div>
+                            <small class="text-danger">@Html.ValidationMessage("Precio")</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myModal').modal({ backdrop: 'static', keyboard: false }).modal('show');
+        });
+    </script>
+}
+
+

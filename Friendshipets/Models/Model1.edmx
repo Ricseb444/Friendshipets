@@ -1,0 +1,759 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FriendshipetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarritoCompras">
+          <Key>
+            <PropertyRef Name="IDCarrito" />
+          </Key>
+          <Property Name="IDCarrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCliente" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="MontoTotal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="FechaAgregado" Type="datetime" />
+          <Property Name="EstadoCarrito" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DNI_Cliente" Type="int" Nullable="false" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ApellidosCliente" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="EstadoCliente" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DetalleCarrito">
+          <Key>
+            <PropertyRef Name="IDDetalleCarrito" />
+          </Key>
+          <Property Name="IDDetalleCarrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCarrito" Type="int" Nullable="false" />
+          <Property Name="IDProducto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="DetalleFacturacion">
+          <Key>
+            <PropertyRef Name="IDDetalle" />
+          </Key>
+          <Property Name="IDDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDFactura" Type="int" Nullable="false" />
+          <Property Name="IDProducto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Facturacion">
+          <Key>
+            <PropertyRef Name="IDFactura" />
+          </Key>
+          <Property Name="IDFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCliente" Type="int" Nullable="false" />
+          <Property Name="FechaFactura" Type="datetime" Nullable="false" />
+          <Property Name="MontoTotal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="EstadoFactura" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="IDPedido" />
+          </Key>
+          <Property Name="IDPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCliente" Type="int" Nullable="false" />
+          <Property Name="IDCarrito" Type="int" Nullable="false" />
+          <Property Name="IDFactura" Type="int" />
+          <Property Name="FechaPedido" Type="datetime" Nullable="false" />
+          <Property Name="EstadoPedido" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="MontoTotal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="DireccionEnvio" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="NombreProducto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EstadoProducto" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ExistenciaProducto" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Categoria" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IDProveedor" Type="int" Nullable="false" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+          <Property Name="ImgProducto" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="IDProveedor" />
+          </Key>
+          <Property Name="IDProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreProveedor" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="EstadoProveedor" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CorreoUsuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RolUsuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EstadoUsuario" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IDCliente" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CarritoCo__Estad__44FF419A">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="CarritoCompras">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleCa__IDPro__4AB81AF0">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="DetalleCarrito" Type="Self.DetalleCarrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="DetalleCarrito">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleCa__Monto__49C3F6B7">
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="1" />
+          <End Role="DetalleCarrito" Type="Self.DetalleCarrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarritoCompras">
+              <PropertyRef Name="IDCarrito" />
+            </Principal>
+            <Dependent Role="DetalleCarrito">
+              <PropertyRef Name="IDCarrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleFa__IDFac__3D5E1FD2">
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="1" />
+          <End Role="DetalleFacturacion" Type="Self.DetalleFacturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturacion">
+              <PropertyRef Name="IDFactura" />
+            </Principal>
+            <Dependent Role="DetalleFacturacion">
+              <PropertyRef Name="IDFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleFa__IDPro__3E52440B">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="DetalleFacturacion" Type="Self.DetalleFacturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="DetalleFacturacion">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facturaci__IDCli__3A81B327">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__IDCarri__5165187F">
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarritoCompras">
+              <PropertyRef Name="IDCarrito" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="IDCarrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__IDClien__5070F446">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__IDFactu__52593CB8">
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturacion">
+              <PropertyRef Name="IDFactura" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="IDFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__IDPro__2B3F6F97">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="IDProveedor" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="IDProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__IDClie__35BCFE0A">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FriendshipetModelStoreContainer">
+          <EntitySet Name="CarritoCompras" EntityType="Self.CarritoCompras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleCarrito" EntityType="Self.DetalleCarrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleFacturacion" EntityType="Self.DetalleFacturacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturacion" EntityType="Self.Facturacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CarritoCo__Estad__44FF419A" Association="Self.FK__CarritoCo__Estad__44FF419A">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleCa__IDPro__4AB81AF0" Association="Self.FK__DetalleCa__IDPro__4AB81AF0">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetalleCarrito" EntitySet="DetalleCarrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleCa__Monto__49C3F6B7" Association="Self.FK__DetalleCa__Monto__49C3F6B7">
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+            <End Role="DetalleCarrito" EntitySet="DetalleCarrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleFa__IDFac__3D5E1FD2" Association="Self.FK__DetalleFa__IDFac__3D5E1FD2">
+            <End Role="Facturacion" EntitySet="Facturacion" />
+            <End Role="DetalleFacturacion" EntitySet="DetalleFacturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleFa__IDPro__3E52440B" Association="Self.FK__DetalleFa__IDPro__3E52440B">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetalleFacturacion" EntitySet="DetalleFacturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facturaci__IDCli__3A81B327" Association="Self.FK__Facturaci__IDCli__3A81B327">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__IDCarri__5165187F" Association="Self.FK__Pedidos__IDCarri__5165187F">
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__IDClien__5070F446" Association="Self.FK__Pedidos__IDClien__5070F446">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__IDFactu__52593CB8" Association="Self.FK__Pedidos__IDFactu__52593CB8">
+            <End Role="Facturacion" EntitySet="Facturacion" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__IDPro__2B3F6F97" Association="Self.FK__Productos__IDPro__2B3F6F97">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__IDClie__35BCFE0A" Association="Self.FK__Usuarios__IDClie__35BCFE0A">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FriendshipetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarritoCompras">
+          <Key>
+            <PropertyRef Name="IDCarrito" />
+          </Key>
+          <Property Name="IDCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCliente" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="FechaAgregado" Type="DateTime" Precision="3" />
+          <Property Name="EstadoCarrito" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__CarritoCo__Estad__44FF419A" FromRole="CarritoCompras" ToRole="Clientes" />
+          <NavigationProperty Name="DetalleCarrito" Relationship="Self.FK__DetalleCa__Monto__49C3F6B7" FromRole="CarritoCompras" ToRole="DetalleCarrito" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__IDCarri__5165187F" FromRole="CarritoCompras" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IDCliente" />
+          </Key>
+          <Property Name="IDCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DNI_Cliente" Type="Int32" Nullable="false" />
+          <Property Name="NombreCliente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidosCliente" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EstadoCliente" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CarritoCompras" Relationship="Self.FK__CarritoCo__Estad__44FF419A" FromRole="Clientes" ToRole="CarritoCompras" />
+          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Facturaci__IDCli__3A81B327" FromRole="Clientes" ToRole="Facturacion" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__IDClien__5070F446" FromRole="Clientes" ToRole="Pedidos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__IDClie__35BCFE0A" FromRole="Clientes" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="DetalleCarrito">
+          <Key>
+            <PropertyRef Name="IDDetalleCarrito" />
+          </Key>
+          <Property Name="IDDetalleCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCarrito" Type="Int32" Nullable="false" />
+          <Property Name="IDProducto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Monto" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="CarritoCompras" Relationship="Self.FK__DetalleCa__Monto__49C3F6B7" FromRole="DetalleCarrito" ToRole="CarritoCompras" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__DetalleCa__IDPro__4AB81AF0" FromRole="DetalleCarrito" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="DetalleFacturacion">
+          <Key>
+            <PropertyRef Name="IDDetalle" />
+          </Key>
+          <Property Name="IDDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDFactura" Type="Int32" Nullable="false" />
+          <Property Name="IDProducto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Monto" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Facturacion" Relationship="Self.FK__DetalleFa__IDFac__3D5E1FD2" FromRole="DetalleFacturacion" ToRole="Facturacion" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__DetalleFa__IDPro__3E52440B" FromRole="DetalleFacturacion" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Facturacion">
+          <Key>
+            <PropertyRef Name="IDFactura" />
+          </Key>
+          <Property Name="IDFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCliente" Type="Int32" Nullable="false" />
+          <Property Name="FechaFactura" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="EstadoFactura" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Facturaci__IDCli__3A81B327" FromRole="Facturacion" ToRole="Clientes" />
+          <NavigationProperty Name="DetalleFacturacion" Relationship="Self.FK__DetalleFa__IDFac__3D5E1FD2" FromRole="Facturacion" ToRole="DetalleFacturacion" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK__Pedidos__IDFactu__52593CB8" FromRole="Facturacion" ToRole="Pedidos" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="IDPedido" />
+          </Key>
+          <Property Name="IDPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCliente" Type="Int32" Nullable="false" />
+          <Property Name="IDCarrito" Type="Int32" Nullable="false" />
+          <Property Name="IDFactura" Type="Int32" />
+          <Property Name="FechaPedido" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstadoPedido" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="DireccionEnvio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CarritoCompras" Relationship="Self.FK__Pedidos__IDCarri__5165187F" FromRole="Pedidos" ToRole="CarritoCompras" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Pedidos__IDClien__5070F446" FromRole="Pedidos" ToRole="Clientes" />
+          <NavigationProperty Name="Facturacion" Relationship="Self.FK__Pedidos__IDFactu__52593CB8" FromRole="Pedidos" ToRole="Facturacion" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="NombreProducto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EstadoProducto" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ExistenciaProducto" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDProveedor" Type="Int32" Nullable="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="ImgProducto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DetalleCarrito" Relationship="Self.FK__DetalleCa__IDPro__4AB81AF0" FromRole="Productos" ToRole="DetalleCarrito" />
+          <NavigationProperty Name="DetalleFacturacion" Relationship="Self.FK__DetalleFa__IDPro__3E52440B" FromRole="Productos" ToRole="DetalleFacturacion" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK__Productos__IDPro__2B3F6F97" FromRole="Productos" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="IDProveedor" />
+          </Key>
+          <Property Name="IDProveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProveedor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EstadoProveedor" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__IDPro__2B3F6F97" FromRole="Proveedores" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorreoUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RolUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EstadoUsuario" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IDCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Usuarios__IDClie__35BCFE0A" FromRole="Usuarios" ToRole="Clientes" />
+        </EntityType>
+        <Association Name="FK__CarritoCo__Estad__44FF419A">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="CarritoCompras">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleCa__Monto__49C3F6B7">
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="1" />
+          <End Role="DetalleCarrito" Type="Self.DetalleCarrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarritoCompras">
+              <PropertyRef Name="IDCarrito" />
+            </Principal>
+            <Dependent Role="DetalleCarrito">
+              <PropertyRef Name="IDCarrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__IDCarri__5165187F">
+          <End Role="CarritoCompras" Type="Self.CarritoCompras" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarritoCompras">
+              <PropertyRef Name="IDCarrito" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="IDCarrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facturaci__IDCli__3A81B327">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__IDClien__5070F446">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__IDClie__35BCFE0A">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IDCliente" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IDCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleCa__IDPro__4AB81AF0">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="DetalleCarrito" Type="Self.DetalleCarrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="DetalleCarrito">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleFa__IDFac__3D5E1FD2">
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="1" />
+          <End Role="DetalleFacturacion" Type="Self.DetalleFacturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturacion">
+              <PropertyRef Name="IDFactura" />
+            </Principal>
+            <Dependent Role="DetalleFacturacion">
+              <PropertyRef Name="IDFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleFa__IDPro__3E52440B">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="DetalleFacturacion" Type="Self.DetalleFacturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="DetalleFacturacion">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedidos__IDFactu__52593CB8">
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturacion">
+              <PropertyRef Name="IDFactura" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="IDFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__IDPro__2B3F6F97">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="IDProveedor" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="IDProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FriendshipetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarritoCompras" EntityType="Self.CarritoCompras" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="DetalleCarrito" EntityType="Self.DetalleCarrito" />
+          <EntitySet Name="DetalleFacturacion" EntityType="Self.DetalleFacturacion" />
+          <EntitySet Name="Facturacion" EntityType="Self.Facturacion" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK__CarritoCo__Estad__44FF419A" Association="Self.FK__CarritoCo__Estad__44FF419A">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleCa__Monto__49C3F6B7" Association="Self.FK__DetalleCa__Monto__49C3F6B7">
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+            <End Role="DetalleCarrito" EntitySet="DetalleCarrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__IDCarri__5165187F" Association="Self.FK__Pedidos__IDCarri__5165187F">
+            <End Role="CarritoCompras" EntitySet="CarritoCompras" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facturaci__IDCli__3A81B327" Association="Self.FK__Facturaci__IDCli__3A81B327">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__IDClien__5070F446" Association="Self.FK__Pedidos__IDClien__5070F446">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__IDClie__35BCFE0A" Association="Self.FK__Usuarios__IDClie__35BCFE0A">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleCa__IDPro__4AB81AF0" Association="Self.FK__DetalleCa__IDPro__4AB81AF0">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetalleCarrito" EntitySet="DetalleCarrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleFa__IDFac__3D5E1FD2" Association="Self.FK__DetalleFa__IDFac__3D5E1FD2">
+            <End Role="Facturacion" EntitySet="Facturacion" />
+            <End Role="DetalleFacturacion" EntitySet="DetalleFacturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleFa__IDPro__3E52440B" Association="Self.FK__DetalleFa__IDPro__3E52440B">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetalleFacturacion" EntitySet="DetalleFacturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedidos__IDFactu__52593CB8" Association="Self.FK__Pedidos__IDFactu__52593CB8">
+            <End Role="Facturacion" EntitySet="Facturacion" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__IDPro__2B3F6F97" Association="Self.FK__Productos__IDPro__2B3F6F97">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FriendshipetModelStoreContainer" CdmEntityContainer="FriendshipetEntities">
+          <EntitySetMapping Name="CarritoCompras">
+            <EntityTypeMapping TypeName="FriendshipetModel.CarritoCompras">
+              <MappingFragment StoreEntitySet="CarritoCompras">
+                <ScalarProperty Name="IDCarrito" ColumnName="IDCarrito" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+                <ScalarProperty Name="FechaAgregado" ColumnName="FechaAgregado" />
+                <ScalarProperty Name="EstadoCarrito" ColumnName="EstadoCarrito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="FriendshipetModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="DNI_Cliente" ColumnName="DNI_Cliente" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="ApellidosCliente" ColumnName="ApellidosCliente" />
+                <ScalarProperty Name="EstadoCliente" ColumnName="EstadoCliente" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleCarrito">
+            <EntityTypeMapping TypeName="FriendshipetModel.DetalleCarrito">
+              <MappingFragment StoreEntitySet="DetalleCarrito">
+                <ScalarProperty Name="IDDetalleCarrito" ColumnName="IDDetalleCarrito" />
+                <ScalarProperty Name="IDCarrito" ColumnName="IDCarrito" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleFacturacion">
+            <EntityTypeMapping TypeName="FriendshipetModel.DetalleFacturacion">
+              <MappingFragment StoreEntitySet="DetalleFacturacion">
+                <ScalarProperty Name="IDDetalle" ColumnName="IDDetalle" />
+                <ScalarProperty Name="IDFactura" ColumnName="IDFactura" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturacion">
+            <EntityTypeMapping TypeName="FriendshipetModel.Facturacion">
+              <MappingFragment StoreEntitySet="Facturacion">
+                <ScalarProperty Name="IDFactura" ColumnName="IDFactura" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+                <ScalarProperty Name="EstadoFactura" ColumnName="EstadoFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedidos">
+            <EntityTypeMapping TypeName="FriendshipetModel.Pedidos">
+              <MappingFragment StoreEntitySet="Pedidos">
+                <ScalarProperty Name="IDPedido" ColumnName="IDPedido" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="IDCarrito" ColumnName="IDCarrito" />
+                <ScalarProperty Name="IDFactura" ColumnName="IDFactura" />
+                <ScalarProperty Name="FechaPedido" ColumnName="FechaPedido" />
+                <ScalarProperty Name="EstadoPedido" ColumnName="EstadoPedido" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+                <ScalarProperty Name="DireccionEnvio" ColumnName="DireccionEnvio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="FriendshipetModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="EstadoProducto" ColumnName="EstadoProducto" />
+                <ScalarProperty Name="ExistenciaProducto" ColumnName="ExistenciaProducto" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="IDProveedor" ColumnName="IDProveedor" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="ImgProducto" ColumnName="ImgProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="FriendshipetModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="IDProveedor" ColumnName="IDProveedor" />
+                <ScalarProperty Name="NombreProveedor" ColumnName="NombreProveedor" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="EstadoProveedor" ColumnName="EstadoProveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="FriendshipetModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="CorreoUsuario" ColumnName="CorreoUsuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="RolUsuario" ColumnName="RolUsuario" />
+                <ScalarProperty Name="EstadoUsuario" ColumnName="EstadoUsuario" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

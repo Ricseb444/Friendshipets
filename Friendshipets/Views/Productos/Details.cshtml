@@ -1,0 +1,60 @@
+﻿@model Friendshipets.Models.ViewModels.cListaProductos
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <ol class="breadcrumb mb-4 mt-4">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index","Productos")">Productos</a></li>
+        <li class="breadcrumb-item active">Detalles</li>
+    </ol>
+
+    <div class="card shadow-lg rounded">
+        <div class="card-header">
+            <i class="fas fa-info-circle me-1"></i> Detalles del Producto
+        </div>
+        <div class="card-body">
+            <div class="row mb-3 pb-2 border-bottom">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.NombreProveedor):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.NombreProveedor)
+                </div>
+            </div>
+            <div class="row mb-3 pb-2 border-bottom">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.Categoria):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.Categoria)
+                </div>
+            </div>
+            <div class="row mb-3 pb-2 border-bottom">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.Stock):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.Stock)
+                </div>
+            </div>
+            <div class="row mb-3 pb-2">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.Precio):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.Precio)
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="@Url.Action("Edit", new { id = Model.IDProducto })" class="btn btn-primary">
+                Editar
+            </a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                Volver a la Lista
+            </a>
+        </div>
+    </div>
+</div>

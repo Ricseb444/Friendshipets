@@ -1,0 +1,76 @@
+﻿@model List<Friendshipets.Models.ViewModels.cListaProveedores>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Administración</a></li>
+    <li class="breadcrumb-item active">Proveedores</li>
+</ol>
+
+<div class="card shadow-lg">
+    <div class="card-header">
+        <i class="fas fa-bookmark me-1"></i> Lista de Proveedores
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-success" onclick="document.location.href = '@Url.Content("~/Proveedores/Create")'">Crear Nuevo</button>
+                <hr />
+                <table id="tabla" class="display cell-border" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>IDProveedor</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Dirección</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var fila in Model)
+                        {
+                            <tr>
+                                <td>@fila.IDProveedor</td>
+                                <td>@fila.NombreProveedor</td>
+                                <td>@fila.Telefono</td>
+                                <td>@fila.Email</td>
+                                <td>@fila.Direccion</td>
+                                @*Estas rutas hacen referencia a el controlador y el actionresult del que se encargan o a la vista que contienen*@
+                                <td><input type="button" value="Consultar" class="btn btn-success" onclick="window.location.href='@Url.Content("~/Proveedores/Details/" + fila.IDProveedor)'" /></td>
+                                <td><input type="button" value="Editar" class="btn btn-primary" onclick="window.location.href='@Url.Content("~/Proveedores/Edit/" + fila.IDProveedor)'" /></td>
+                                <td><input type="button" value="Eliminar" class="btn btn-danger" onclick="window.location.href='@Url.Content("~/Proveedores/Delete/" + fila.IDProveedor)'" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tabla').DataTable({
+                responsive: true,
+                columnDefs: [//Esto es para que la tabla no orderne los registros por la columna en la que están los botones
+                    {
+                        "targets": [5, 6, 7],
+                        "orderable": false,
+                        "searchable": false
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.2.2/i18n/es-ES.json',
+                },
+            });
+        });
+    </script>
+}

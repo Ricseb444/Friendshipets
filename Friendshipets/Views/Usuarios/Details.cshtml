@@ -1,0 +1,76 @@
+﻿@model Friendshipets.Models.ViewModels.cListaUsuarios
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <ol class="breadcrumb mb-4 mt-4">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index","Usuarios")">Usuarios</a></li>
+        <li class="breadcrumb-item active">Detalles</li>
+    </ol>
+
+    <div class="card shadow-lg rounded">
+        <div class="card-header">
+            <i class="fas fa-info-circle me-1"></i> Detalles del Usuario
+        </div>
+        <div class="card-body">
+            <div class="row mb-3 pb-2 border-bottom">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.IDCliente):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.IDCliente)
+                </div>
+            </div>
+            <div class="row mb-3 pb-2 border-bottom">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.NombreCliente):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.NombreCliente)
+                </div>
+            </div>
+            <div class="row mb-3 pb-2 border-bottom">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.ApellidosCliente):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.ApellidosCliente)
+                </div>
+            </div>
+            <div class="row mb-3 pb-2 border-bottom">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.CorreoUsuario):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.CorreoUsuario)
+                </div>
+            </div>
+            <div class="row mb-3 pb-2 border-bottom">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.NombreUsuario):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.NombreUsuario)
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 fw-bold ">
+                    @Html.LabelFor(u => u.RolUsuario):
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(u => u.RolUsuario)
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="@Url.Action("Edit", new { id = Model.IDUsuario })" class="btn btn-primary">
+                Editar
+            </a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                Volver a la Lista
+            </a>
+        </div>
+    </div>
+</div>

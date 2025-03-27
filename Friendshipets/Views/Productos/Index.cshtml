@@ -1,0 +1,77 @@
+﻿@model List<Friendshipets.Models.ViewModels.cListaProductos>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Administración</a></li>
+    <li class="breadcrumb-item active">Productos</li>
+</ol>
+
+<div class="card shadow-lg">
+    <div class="card-header">
+        <i class="fas fa-boxes me-1"></i> Lista de Productos
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-success" onclick="document.location.href = '@Url.Content("~/Productos/Create")'">Crear Nuevo</button>
+                <hr />
+                <table id="tabla" class="display cell-border" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th><div>ID Producto</div></th>
+                            <th><div>Nombre Producto</div></th>
+                            <th><div>Nombre Proveedor</div></th>
+                            <th><div>Categoría</div></th>
+                            <th><div>Stock</div></th>
+                            <th><div>Precio</div></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var fila in Model)
+                        {
+                            <tr>
+                                <td>@fila.IDProducto</td>
+                                <td>@fila.NombreProducto</td>
+                                <td>@fila.NombreProveedor</td>
+                                <td>@fila.Categoria</td>
+                                <td>@fila.Stock</td>
+                                <td>@fila.Precio</td>
+                                <td><input type="button" value="Consultar" class="btn btn-success" onclick="window.location.href='@Url.Content("~/Productos/Details/" + fila.IDProducto)'" /></td>
+                                <td><input type="button" value="Editar" class="btn btn-primary" onclick="window.location.href='@Url.Content("~/Productos/Edit/" + fila.IDProducto)'" /></td>
+                                <td><input type="button" value="Eliminar" class="btn btn-danger" onclick="window.location.href='@Url.Content("~/Productos/Delete/" + fila.IDProducto)'" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tabla').DataTable({
+                responsive: true,
+                columnDefs: [//Esto es para que la tabla no orderne los registros por la columna en la que están los botones
+                    {
+                        "targets": [6, 7, 8],
+                        "orderable": false,
+                        "searchable": false
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.2.2/i18n/es-ES.json',
+                },
+            });
+        });
+    </script>
+}

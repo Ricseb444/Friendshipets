@@ -1,0 +1,41 @@
+﻿@model Friendshipets.Models.ViewModels.MiPerfilViewModel
+@{
+    ViewBag.Title = "Mi Perfil";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+}
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        @TempData["Mensaje"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="container my-5 py-5">
+    <div class="card mx-auto shadow-lg" style="max-width: 600px; border-radius: 20px;">
+        <div class="card-body text-center">
+
+            <h4 class="card-title">@Model.NombreUsuario</h4>
+            <p class="text-muted mb-4">@Model.NombreCliente @Model.ApellidosCliente</p>
+
+            <ul class="list-group list-group-flush text-start mb-3">
+                <li class="list-group-item"><strong>ID Cliente:</strong> @Model.IDCliente</li>
+                <li class="list-group-item"><strong>Cédula:</strong> @Model.DNI_Cliente</li>
+                <li class="list-group-item"><strong>Correo:</strong> @Model.CorreoUsuario</li>
+                <li class="list-group-item"><strong>Dirección:</strong> @Model.Direccion</li>
+            </ul>
+
+            <div class="d-flex justify-content-center gap-2">
+                <a href="@Url.Action("EditarPerfil", "MiPerfil")" class="btn btn-primary">
+                    <i class="bi bi-pencil-square"></i> Editar Perfil
+                </a>
+                <form action="@Url.Action("Logout", "Auth")" method="post">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

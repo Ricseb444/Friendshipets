@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6c293005859648f0ba1fd1d4b876ebbb" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="FriendshipetModel.CarritoCompras" Width="1.5" PointX="12" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendshipetModel.Clientes" Width="1.5" PointX="9.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendshipetModel.DetalleCarrito" Width="1.5" PointX="3.375" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendshipetModel.DetalleFacturacion" Width="1.5" PointX="5.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendshipetModel.Facturacion" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendshipetModel.Pedidos" Width="1.5" PointX="9.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendshipetModel.Productos" Width="1.5" PointX="3.125" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendshipetModel.Proveedores" Width="1.5" PointX="0.875" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendshipetModel.Usuarios" Width="1.5" PointX="5.625" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="FriendshipetModel.FK__CarritoCo__Estad__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendshipetModel.FK__DetalleCa__Monto__49C3F6B7" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="FriendshipetModel.FK__Pedidos__IDCarri__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendshipetModel.FK__Facturaci__IDCli__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendshipetModel.FK__Pedidos__IDClien__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendshipetModel.FK__Usuarios__IDClie__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendshipetModel.FK__DetalleCa__IDPro__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendshipetModel.FK__DetalleFa__IDFac__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendshipetModel.FK__DetalleFa__IDPro__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendshipetModel.FK__Pedidos__IDFactu__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendshipetModel.FK__Productos__IDPro__2B3F6F97" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,184 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|d:\\desarrollo\\vsc2022\\friendshipetsv4\\friendshipets\\friendshipets\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|solutionrelative:friendshipets\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|d:\\desarrollo\\vsc2022\\friendshipetsv4\\friendshipets\\friendshipets\\views\\shared\\_layouttienda.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|solutionrelative:friendshipets\\views\\shared\\_layouttienda.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|d:\\desarrollo\\vsc2022\\friendshipetsv4\\friendshipets\\friendshipets\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|solutionrelative:friendshipets\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|d:\\desarrollo\\vsc2022\\friendshipetsv4\\friendshipets\\friendshipets\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|solutionrelative:friendshipets\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\friendshipets\\views\\miperfil\\miperfil.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|solutionrelative:friendshipets\\views\\miperfil\\miperfil.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|d:\\desarrollo\\vsc2022\\friendshipetsv4\\friendshipets\\friendshipets\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|solutionrelative:friendshipets\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|d:\\desarrollo\\vsc2022\\friendshipetsv4\\friendshipets\\friendshipets\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|solutionrelative:friendshipets\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|d:\\desarrollo\\vsc2022\\friendshipetsv4\\friendshipets\\friendshipets\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED9FFECD-C646-4427-ABAE-6F02AD88FD15}|Friendshipets\\Friendshipets.csproj|solutionrelative:friendshipets\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 13,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Friendshipets\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Friendshipets\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-26T23:53:30.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MiPerfil.cshtml",
+              "DocumentMoniker": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\MiPerfil\\MiPerfil.cshtml",
+              "RelativeDocumentMoniker": "Friendshipets\\Views\\MiPerfil\\MiPerfil.cshtml",
+              "ToolTip": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\MiPerfil\\MiPerfil.cshtml",
+              "RelativeToolTip": "Friendshipets\\Views\\MiPerfil\\MiPerfil.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA4AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-26T17:16:18.276Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "Friendshipets\\Views\\Auth\\Login.cshtml",
+              "ToolTip": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "Friendshipets\\Views\\Auth\\Login.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-26T23:46:37.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UsuariosController.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Controllers\\UsuariosController.cs",
+              "RelativeDocumentMoniker": "Friendshipets\\Controllers\\UsuariosController.cs",
+              "ToolTip": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "Friendshipets\\Controllers\\UsuariosController.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-26T23:43:57.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Friendshipets\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Friendshipets\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-26T23:43:10.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_LayoutTienda.cshtml",
+              "DocumentMoniker": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\Shared\\_LayoutTienda.cshtml",
+              "RelativeDocumentMoniker": "Friendshipets\\Views\\Shared\\_LayoutTienda.cshtml",
+              "ToolTip": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\Shared\\_LayoutTienda.cshtml",
+              "RelativeToolTip": "Friendshipets\\Views\\Shared\\_LayoutTienda.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAEsAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-26T23:30:43.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Friendshipets\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Friendshipets\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADkAAABlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-26T23:31:49.975Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BundleConfig.cs",
+              "DocumentMoniker": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\App_Start\\BundleConfig.cs",
+              "RelativeDocumentMoniker": "Friendshipets\\App_Start\\BundleConfig.cs",
+              "ToolTip": "D:\\Desarrollo\\VSC2022\\FriendshipetsV4\\Friendshipets\\Friendshipets\\App_Start\\BundleConfig.cs",
+              "RelativeToolTip": "Friendshipets\\App_Start\\BundleConfig.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBEAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-26T23:31:02.801Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
