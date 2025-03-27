@@ -55,10 +55,13 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-credit-card"></i></div>
                             Facturación
                         </a>
-                        <a class="nav-link" action="@Url.Action("Logout", "Auth")" onclick="return confirm('¿Estás seguro de que quieres salir?');">
-                            <div class="sb-nav-link-icon"><i class="fas fa-door-open"></i></div>
-                            Salir
-                        </a>
+                        <form action="@Url.Action("Logout", "Auth")" method="post" onsubmit="return confirm('¿Estás seguro de que quieres salir?');">
+                            <button type="submit" class="nav-link btn btn-link w-100 text-start" style="color: #adb5bd; text-decoration: none;">
+                                <div class="sb-nav-link-icon"><i class="fas fa-door-open"></i></div>
+                                Salir
+                            </button>
+                        </form>
+
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
