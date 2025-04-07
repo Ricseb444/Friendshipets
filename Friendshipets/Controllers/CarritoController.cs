@@ -79,6 +79,22 @@ namespace Friendshipets.Controllers
         }
 
         [HttpGet]
+        public ActionResult IndexDetalleCarritoCliente(int idCliente)
+        {
+            ViewBag.IDCliente = idCliente;
+            List<cListaDetalleCarrito> listCarr;
+
+            using (FriendshipetEntities db = new FriendshipetEntities())
+            {
+                listCarr = db.Database.SqlQuery<cListaDetalleCarrito>(
+                    "EXEC spMostrarDetalleCarritoCliente @IDCliente",
+                    new SqlParameter("@IDCliente", idCliente)
+                ).ToList();
+            }
+            return View(listCarr);
+        }
+
+        [HttpGet]
         public ActionResult CreateDetalleCarrito(int idCarrito)
         {
             ViewBag.IDCarrito = idCarrito;

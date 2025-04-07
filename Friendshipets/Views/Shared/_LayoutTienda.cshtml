@@ -1,6 +1,8 @@
 ﻿@{
     var rol = Session["RolUsuario"] as string;
     var nombreUsuario = Session["NombreUsuario"] as string;
+    
+
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -53,7 +55,7 @@
 
                 @if (rol == "CLIENTE")
                 {
-                    <form class="d-flex" action="@Url.Action("Index", "Carrito")" method="get">
+                    <form class="d-flex" action="@Url.Action("CarritoIndex", "CarritoCliente" )" method="get">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Carrito
