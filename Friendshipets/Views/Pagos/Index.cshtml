@@ -1,0 +1,103 @@
+﻿@model Friendshipets.Models.ViewModels.cPagos
+
+@{
+    ViewBag.Title = "Método de Pago";
+
+}
+
+<link href="~/Content/estilos.css" rel="stylesheet" />
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div class="jumbotron">
+    <h1>Selecciona un Método de Pago</h1>
+    <p>Por favor, elige el método de pago para finalizar tu compra.</p>
+</div>
+
+<div class="form-container">
+    <!-- Mostrar los productos del carrito -->
+    <h3>Detalles del Carrito</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var producto in Model.Productos)
+            {
+                <tr>
+                    <td>@producto.NombreProducto</td>
+                    <td>@producto.Cantidad</td>
+                    <td>₡@producto.Total</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Monto Total: ₡@Model.MontoTotal</h4>
+
+    <!-- Formulario para seleccionar el método de pago -->
+    <form action="@Url.Action("ProcesarPago", "Pagos", new { idCarrito = Model.IDCarrito })" method="post">
+        <div class="form-group">
+            <label for="metodoPago">Método de Pago</label>
+            <select id="metodoPago" name="metodoPago" class="form-control">
+                <option value="Sinpe">SINPE</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta">Tarjeta</option>
+                <option value="ContraEntrega">Contraentrega</option>
+                <option value="Envio">Envío</option>
+                <option value="Paypal">Paypal</option>
+                <option value="Transferencia">Transferencia Bancaria</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Proceder con Pago</button>
+    </form>
+</div>
+
+<!-- Modal de Pago Exitoso -->
+<div id="successModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pago Realizado con Éxito</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Gracias por tu compra. El pago fue exitoso.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Mostrar el modal si la variable TempData está configurada
+            var showSuccessModal = @((TempData["ShowSuccessModal"] != null && (bool)TempData["ShowSuccessModal"]).ToString().ToLower());
+            if (showSuccessModal) {
+                $('#successModal').modal('show');
+            }
+        });
+    </script>
+}

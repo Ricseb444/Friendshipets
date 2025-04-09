@@ -1,5 +1,6 @@
 ﻿using Friendshipets.Models;
 using Friendshipets.Models.ViewModels;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,6 +11,34 @@ public class AuthController : Controller
     public ActionResult Login()
     {
         return View();
+    }
+
+    private int ObtenerIdCarritoPorCliente(int idCliente)
+    {
+        using (FriendshipetEntities db = new FriendshipetEntities())
+        {
+            var carrito = db.Database.SqlQuery<int?>(
+                "SELECT IDCarrito FROM CarritoCompras WHERE IDCliente = @IDCliente AND EstadoCarrito = 'A'",
+                new SqlParameter("@IDCliente", idCliente)
+            ).FirstOrDefault();
+
+            if (carrito.HasValue)
+            {
+                return carrito.Value;
+            }
+            else
+            {
+                db.Database.ExecuteSqlCommand(
+                    "EXEC spAgregarCarrito @IDCliente",
+                    new SqlParameter("@IDCliente", idCliente)
+                );
+
+                return db.Database.SqlQuery<int>(
+                    "SELECT IDCarrito FROM CarritoCompras WHERE IDCliente = @IDCliente AND EstadoCarrito = 'A'",
+                    new SqlParameter("@IDCliente", idCliente)
+                ).FirstOrDefault();
+            }
+        }
     }
 
     // POST: Login
@@ -37,12 +66,15 @@ public class AuthController : Controller
                     var rol = usuario.RolUsuario.Trim().ToUpper();
 
                     if (rol == "ADMINISTRADOR")
+                    {
                         return RedirectToAction("Index", "Home"); // Panel admin
-
+                    }
                     if (rol == "CLIENTE")
-                        return RedirectToAction("Index", "Tienda"); // Vista cliente
-
-                    // 🚨 Seguridad: rol inválido
+                    {
+                        Session["CarritoId"] = ObtenerIdCarritoPorCliente(usuario.IDCliente);
+                        return RedirectToAction("Index", "Tienda"); // Vista cliente                        
+                    }
+                    
                     Session.Clear();
                     ViewBag.Mensaje = "Rol de usuario no válido. Contacte al administrador.";
                     return View(model);

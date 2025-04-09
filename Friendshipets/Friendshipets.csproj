@@ -135,6 +135,7 @@
     <Compile Include="Controllers\FacturacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MiPerfilController.cs" />
+    <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\TiendaController.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Models\ViewModels\cListaProductos.cs" />
     <Compile Include="Models\ViewModels\cListaProveedores.cs" />
     <Compile Include="Models\ViewModels\cListaUsuarios.cs" />
+    <Compile Include="Models\ViewModels\cPagos.cs" />
     <Compile Include="Models\ViewModels\createCarrito.cs" />
     <Compile Include="Models\ViewModels\createCliente.cs" />
     <Compile Include="Models\ViewModels\createDetalleCarrito.cs" />
@@ -609,6 +611,12 @@
     <Content Include="Views\MiPerfil\MiPerfil.cshtml" />
     <Content Include="Views\MiPerfil\EditarPerfil.cshtml" />
     <Content Include="Views\MiPerfil\CambiarContrasena.cshtml" />
+<<<<<<< Updated upstream
+=======
+    <Content Include="Views\Carrito\IndexDetalleCarritoCliente.cshtml" />
+    <Content Include="Views\CarritoCliente\CarritoIndex.cshtml" />
+    <Content Include="Views\Pagos\Index.cshtml" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
