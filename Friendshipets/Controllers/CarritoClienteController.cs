@@ -149,5 +149,56 @@ namespace Friendshipets.Controllers
         {
             return RedirectToAction("Index", "Pagos");
         }
+
+        [HttpGet]
+        public ActionResult ObtenerCantidadCarrito()
+        {
+            // Verifica que el usuario esté logueado
+            if (Session["IDUsuario"] == null)
+            {
+                return Json(0, JsonRequestBehavior.AllowGet); // Usuario no logueado = 0 productos
+            }
+
+            int idUsuario = (int)Session["IDUsuario"];
+            int idCliente = 0;
+            int cantidadTotal = 0;
+
+            using (FriendshipetEntities db = new FriendshipetEntities())
+            {
+                // Obtener IDCliente
+                var result = db.Database.SqlQuery<int?>(
+                    "SELECT IDCliente FROM Usuarios WHERE IDUsuario = @IDUsuario",
+                    new SqlParameter("@IDUsuario", idUsuario)
+                ).FirstOrDefault();
+
+                if (!result.HasValue)
+                {
+                    return Json(0, JsonRequestBehavior.AllowGet);
+                }
+
+                idCliente = result.Value;
+
+                // Obtener IDCarrito activo
+                var carrito = db.Database.SqlQuery<cCarrito>(
+                    "EXEC spLeerCarritos"
+                ).FirstOrDefault(c => c.IDCliente == idCliente);
+
+                if (carrito == null)
+                {
+                    return Json(0, JsonRequestBehavior.AllowGet);
+                }
+
+                int idCarrito = carrito.IDCarrito;
+
+                // Obtener la suma total de cantidades del carrito
+                cantidadTotal = db.Database.SqlQuery<int?>(
+                    "SELECT SUM(Cantidad) FROM DetalleCarrito WHERE IDCarrito = @IDCarrito",
+                    new SqlParameter("@IDCarrito", idCarrito)
+                ).FirstOrDefault() ?? 0;
+            }
+
+            return Json(cantidadTotal, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
