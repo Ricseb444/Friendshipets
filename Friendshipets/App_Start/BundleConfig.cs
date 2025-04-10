@@ -10,7 +10,7 @@ namespace Friendshipets
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
-
+            
             bundles.Add(new Bundle("~/bundles/complementos").Include(
                         "~/Scripts/fontawesome/all.min.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",

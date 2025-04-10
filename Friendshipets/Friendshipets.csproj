@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CarritoClienteController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
@@ -186,6 +187,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\CambiarContrasenaViewModel.cs" />
+    <Compile Include="Models\ViewModels\cCarrito.cs" />
     <Compile Include="Models\ViewModels\cCatalogo.cs" />
     <Compile Include="Models\ViewModels\cListaCarritos.cs" />
     <Compile Include="Models\ViewModels\cListaClientes.cs" />
@@ -611,12 +613,9 @@
     <Content Include="Views\MiPerfil\MiPerfil.cshtml" />
     <Content Include="Views\MiPerfil\EditarPerfil.cshtml" />
     <Content Include="Views\MiPerfil\CambiarContrasena.cshtml" />
-<<<<<<< Updated upstream
-=======
     <Content Include="Views\Carrito\IndexDetalleCarritoCliente.cshtml" />
     <Content Include="Views\CarritoCliente\CarritoIndex.cshtml" />
     <Content Include="Views\Pagos\Index.cshtml" />
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

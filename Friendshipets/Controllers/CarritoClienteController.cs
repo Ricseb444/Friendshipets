@@ -4,22 +4,26 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Friendshipets.Controllers
 {
-    public class PagosController : Controller
+    public class CarritoClienteController : Controller
     {
-        public ActionResult Index()
+        public ActionResult CarritoIndex()
         {
             // Verificar si el usuario está logueado
             if (Session["IDUsuario"] == null)
             {
+                // Si no está logueado, redirigir al login
                 return RedirectToAction("Login", "Auth");
             }
 
+            // Obtener el ID del usuario logueado
             int idUsuario = (int)Session["IDUsuario"];
-            int idCliente = 0;
+
+            int idCliente = 0; // 0 para manejar el caso en que no se encuentra el cliente
 
             // Obtener el IDCliente del usuario logueado desde la base de datos
             using (FriendshipetEntities db = new FriendshipetEntities())
@@ -39,14 +43,15 @@ namespace Friendshipets.Controllers
             if (idCliente == 0)
             {
                 ViewBag.Mensaje = "No se pudo encontrar el cliente asociado. Vuelve a intentar.";
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Login", "Auth");
             }
 
-            // Obtener el carrito activo del cliente
             int idCarrito = 0;
 
+            // Obtener el carrito activo del cliente usando el procedimiento almacenado 'spLeerCarritos'
             using (FriendshipetEntities db = new FriendshipetEntities())
             {
+                // Obtener el carrito activo usando el procedimiento spLeerCarritos
                 var carritos = db.Database.SqlQuery<cCarrito>(
                     "EXEC spLeerCarritos"
                 ).Where(c => c.IDCliente == idCliente) // Filtramos para obtener el carrito asociado al cliente
@@ -82,8 +87,9 @@ namespace Friendshipets.Controllers
                 return View(); // Retornamos la vista si no hay carrito activo
             }
 
-            // Obtener los productos del carrito utilizando el procedimiento almacenado 'spMostrarDetalleCarrito'
             List<cCarrito> productos;
+
+            // Obtener los productos del carrito utilizando el procedimiento almacenado 'spMostrarDetalleCarrito'
             using (FriendshipetEntities db = new FriendshipetEntities())
             {
                 productos = db.Database.SqlQuery<cCarrito>(
@@ -98,44 +104,50 @@ namespace Friendshipets.Controllers
                 ViewBag.Mensaje = "Tu carrito está vacío. Agrega productos al carrito para continuar.";
             }
 
-            // Calcular el monto total
-            decimal montoTotal = productos.Sum(p => p.Total);
-
-            // Crear el ViewModel para la vista de pagos
-            cPagos pagosModel = new cPagos
+            return View(productos); // Retornamos la lista de productos del carrito
+        }
+        // Acción para actualizar la cantidad de un producto en el carrito
+        [HttpPost]
+        public ActionResult ActualizarCantidad(int idCarrito, int idProducto, int cantidad)
+        {
+            if (cantidad <= 0)
             {
-                IDCarrito = idCarrito,
-                Productos = productos,
-                MontoTotal = montoTotal
-            };
+                return RedirectToAction("CarritoIndex"); // No permitir cantidades negativas o cero
+            }
 
-            // Retornamos la vista con el modelo cPagos
-            return View(pagosModel);
+            using (FriendshipetEntities db = new FriendshipetEntities())
+            {
+                db.Database.ExecuteSqlCommand(
+                    "EXEC spInsertarDetalleCarrito @IDCarrito, @IDProducto, @Cantidad",
+                    new SqlParameter("@IDCarrito", idCarrito),
+                    new SqlParameter("@IDProducto", idProducto),
+                    new SqlParameter("@Cantidad", cantidad)
+                );
+            }
+
+            return RedirectToAction("CarritoIndex");
+        }
+        // Acción para eliminar un producto del carrito
+        [HttpPost]
+        public ActionResult EliminarProducto(int idCarrito, int idProducto)
+        {
+            using (FriendshipetEntities db = new FriendshipetEntities())
+            {
+                db.Database.ExecuteSqlCommand(
+                    "EXEC spEliminarProductoCarrito @IDProducto, @IDCarrito",
+                    new SqlParameter("@IDProducto", idProducto),
+                    new SqlParameter("@IDCarrito", idCarrito)
+                );
+            }
+
+            return RedirectToAction("CarritoIndex");
         }
 
-        [HttpPost]
-        public ActionResult ProcesarPago(int idCarrito)
+        [HttpGet]
+        // Acción para redirigir al proceso de pago
+        public ActionResult ProcederPagar()
         {
-            try
-            {
-                using (FriendshipetEntities db = new FriendshipetEntities())
-                {
-                    db.Database.ExecuteSqlCommand(
-                        "EXEC spCrearFacturaConDetalles @IDCarrito",
-                         new SqlParameter("@IDCarrito", idCarrito)
-                    );
-                }
-                TempData["SuccessMessage"] = "Factura generada exitosamente.";
-                return RedirectToAction("CarritoIndex", "CarritoCliente");
-            }
-            catch (Exception ex)
-            {
-                var mensajeError = ex.InnerException?.Message ?? ex.Message;
-                System.Diagnostics.Debug.WriteLine("Error interno: " + mensajeError);
-
-                TempData["ErrorMessage"] = "Ocurrió un error al generar la factura: " + ex.Message;
-                return RedirectToAction("Index", "Pagos");
-            }
+            return RedirectToAction("Index", "Pagos");
         }
     }
 }

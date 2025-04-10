@@ -10836,3 +10836,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.bg-second-primary {
+    background-color: #004A93 !important;
+}

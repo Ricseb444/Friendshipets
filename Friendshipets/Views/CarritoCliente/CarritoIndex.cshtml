@@ -1,60 +1,66 @@
 ﻿@model List<Friendshipets.Models.ViewModels.cCarrito>
 
-<h2>Tu Carrito</h2>
-@if (Model.Count > 0)
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Total</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.NombreProducto</td>
-                    <td>₡@item.Precio</td>
-                    <td>
-                        <span>@item.Cantidad</span> <!-- Muestra la cantidad, pero no permite editarla -->
-                        <input type="hidden" name="idCarrito" value="@item.IDCarrito" />
-                        <input type="hidden" name="idProducto" value="@item.IDProducto" />
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Tienda")">Tienda</a></li>
+    <li class="breadcrumb-item active">Carrito</li>
+</ol>
+<div class="card shadow mb-4 mt-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Tu Carrito de Compras</h6>
+    </div>
+    <div class="card-body">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.NombreProducto</td>
+                            <td>₡@item.Precio</td>
+                            <td>
+                                <span>@item.Cantidad</span> <!-- Muestra la cantidad, pero no permite editarla -->
+                                <input type="hidden" name="idCarrito" value="@item.IDCarrito" />
+                                <input type="hidden" name="idProducto" value="@item.IDProducto" />
 
 
-                    </td>
-                    <td>₡@item.Total</td>
-                    <td>
-                        <form action="@Url.Action("EliminarProducto", "CarritoCliente")" method="post" style="display:inline;">
-                            <input type="hidden" name="idProducto" value="@item.IDProducto" />
-                            <input type="hidden" name="idCarrito" value="@item.IDCarrito" />
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <div>
+                            </td>
+                            <td>₡@item.Total</td>
+                            <td>
+                                <form action="@Url.Action("EliminarProducto", "CarritoCliente")" method="post" style="display:inline;">
+                                    <input type="hidden" name="idProducto" value="@item.IDProducto" />
+                                    <input type="hidden" name="idCarrito" value="@item.IDCarrito" />
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>            
+        }
+        else
+        {
+            <p>@ViewBag.Mensaje</p>
+        }
+    </div>
+    <div class="card-footer">
         @if (Model != null && Model.Any())
         {
             // Usar el primer elemento de la lista para obtener IDCarrito
             var firstItem = Model.First();
             <a href="@Url.Action("ProcederPagar", "CarritoCliente", new { idCarrito = firstItem.IDCarrito})" class="btn btn-primary">Proceder a Pagar</a>
-        }
-        else
-        {
-            // Si no hay elementos en la lista, mostrar un mensaje o botón deshabilitado
-            <p>No hay datos disponibles para agregar productos.</p>
-        }
+        }        
         @*<a href="@Url.Action("ProcederPagar", "CarritoCliente", new {idCarrito = Model.FirstOrDefault<>.})" class="btn btn-success">Proceder a Pagar</a>*@
         <a href="@Url.Action("Catalogo", "Catalogo")" class="btn btn-secondary">Seguir Comprando</a>
     </div>
-}
-else
-{
-    <p>@ViewBag.Mensaje</p>
-}
+</div>
+
