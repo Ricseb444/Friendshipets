@@ -3,6 +3,35 @@
     Layout = "~/Views/Shared/_LayoutTienda.cshtml";
 }
 
+@section Estilos {
+        <link rel="stylesheet" href="@Url.Content("~/Content/catalogo.css")" />
+    }
+
+<div class="category-bar">
+    <nav class="categories-nav">
+        <ul>
+            <li><a href="@Url.Action("Catalogo", "Catalogo", new { categoria = "Alimento Perro" })">Alimento Perro</a></li>
+            <li><a href="@Url.Action("Catalogo", "Catalogo", new { categoria = "Juguetes Perro" })">Juguetes Perro</a></li>
+            <li><a href="@Url.Action("Catalogo", "Catalogo", new { categoria = "Alimento Gato" })">Alimento Gato</a></li>
+            <li><a href="@Url.Action("Catalogo", "Catalogo", new { categoria = "Juguetes Gato" })">Juguetes Gato</a></li>
+            <li><a href="@Url.Action("Catalogo", "Catalogo", new { categoria = "Higiene Perro" })">Higiene Perro</a></li>
+            <li><a href="@Url.Action("Catalogo", "Catalogo", new { categoria = "Higiene Gato" })">Higiene Gato</a></li>
+            <li><a href="@Url.Action("Catalogo", "Catalogo", new { categoria = "Premios Perro" })">Premios Perro</a></li>
+            <li><a href="@Url.Action("Catalogo", "Catalogo", new { categoria = "Premios Gato" })">Premios Gato</a></li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Título y descripción del catálogo -->
+@if (ViewBag.categoria != null)
+{
+    <div class="catalog-title">
+        <h1>@ViewBag.categoria</h1>
+        <p>Mostrando productos de la categoría "@ViewBag.categoria"</p>
+    </div>
+}
+
+
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">
@@ -19,31 +48,36 @@
 
 <main>
     <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="container px-4 px-lg-5 mt-1">
+            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 @foreach (var producto in Model)
                 {
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <!-- Imagen del producto -->
+                            @*Imagen del producto*@
                             @if (!string.IsNullOrEmpty(producto.ImgProducto))
                             {
-                                <img class="card-img-top" src="@Url.Content(producto.ImgProducto)" alt="@producto.NombreProducto" />
+                                <img class="card-img-top product-img" 
+                                     src="@Url.Content(producto.ImgProducto)" 
+                                     alt="@producto.NombreProducto" 
+                                     onerror="this.onerror = null; this.src = '@Url.Content("~/Content/Images/Default.jpeg")';"/>
                             }
                             else
                             {
                                 <img class="card-img-top" src="~/Content/Images/Default.jpeg" alt="Imagen no disponible" />
                             }
 
-                            <!-- Detalles del producto -->
+                            @*Detalles del producto*@
                             <div class="card-body p-4">
                                 <div class="text-center">
-                                    <h5 class="fw-bolder">@producto.NombreProducto</h5>
+                                    <h5 class="fw-bolder product-title" title="@producto.NombreProducto">
+                                        @producto.NombreProducto
+                                    </h5>
                                     ₡@producto.Precio
                                 </div>
                             </div>
 
-                            <!-- Acciones del producto -->
+                            @*Acciones del producto*@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
                                     <form action="@Url.Action("AgregarProducto", "Catalogo")" method="post">
@@ -61,7 +95,5 @@
 
         </div>
     </section>
-
-
 </main>
 

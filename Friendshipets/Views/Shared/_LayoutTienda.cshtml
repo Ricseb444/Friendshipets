@@ -9,10 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Friendshipets</title>    
+    <title>Friendshipets</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="~/Content/styles.css" rel="stylesheet" />
     <link href="~/Content/css_header.css" rel="stylesheet" />
+    @RenderSection("Estilos", required: false)
 </head>
 
 <body>
@@ -39,7 +40,7 @@
                         <a class="nav-link" href="@Url.Action("Catalogo", "Catalogo")">Catálogo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Contact", "Home")">Contáctenos</a>
+                        <a class="nav-link" href="@Url.Action("Contactenos", "Tienda")">Contáctenos</a>
                     </li>
 
                     @if (!string.IsNullOrEmpty(rol))

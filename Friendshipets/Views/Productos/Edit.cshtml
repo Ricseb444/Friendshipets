@@ -1,6 +1,6 @@
 ﻿@model Friendshipets.Models.ViewModels.editProducto
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar Producto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -37,7 +37,7 @@
         </div>
     }
 
-    @using (Html.BeginForm("Edit", "Productos", FormMethod.Post))
+    @using (Html.BeginForm("Edit", "Productos", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="card shadow-lg">
             <div class="card-header">
@@ -52,11 +52,17 @@
                         <button type="button" class="btn btn-success w-100 btn-lg" onclick="document.location.href = '@Url.Content("~/Productos/Index")'">
                             Volver
                         </button>
+                        <div class="mt-3">
+                            <label for="ImagenProducto" class="form-label">Subir Imagen del Producto:</label>
+                            <input type="file" name="ImagenProducto" class="form-control" id="ImagenProducto" accept=".jpg,.jpeg,.png,.gif" />
+                            <small class="form-text text-muted">Solo se permiten imágenes (JPG, PNG, GIF).</small>
+                        </div>
                     </div>
                     <div class="col-md-8">
                         <div class="form-group row mb-3">
                             <label class="col-md-4 col-form-label text-md-right">
                                 @Html.HiddenFor(u => u.IDProducto)
+                                @Html.HiddenFor(u => u.ImgProducto)
                                 @Html.LabelFor(u => u.NombreProducto):
                             </label>
                             <div class="col-md-8 input-group">

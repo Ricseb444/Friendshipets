@@ -26,6 +26,7 @@ namespace Friendshipets.Controllers
                 }
                 else
                 {
+                    ViewBag.categoria = categoria;
                     productosList = db.Database.SqlQuery<cCatalogo>(
                         "EXEC spLeerProductosPorCategoria @Categoria",
                         new SqlParameter("@Categoria", categoria.ToUpper())

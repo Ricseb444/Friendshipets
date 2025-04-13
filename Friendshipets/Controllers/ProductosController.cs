@@ -126,7 +126,7 @@ namespace Friendshipets.Controllers
 
         // POST: Productos/Edit/5
         [HttpPost]
-        public ActionResult Edit(editProducto producto)
+        public ActionResult Edit(editProducto producto, HttpPostedFileBase ImagenProducto)
         {
             try
             {
@@ -134,16 +134,58 @@ namespace Friendshipets.Controllers
                 {
                     return View(producto);
                 }
+
+                if (ImagenProducto == null || ImagenProducto.ContentLength == 0)
+                {
+                    using (FriendshipetEntities db = new FriendshipetEntities())
+                    {
+                        var productoActual = db.Productos.FirstOrDefault(p => p.IDProducto == producto.IDProducto);
+                        if (productoActual != null) 
+                        { 
+                            producto.ImgProducto = productoActual.ImgProducto;
+                        }
+                        else
+                        {
+                            ViewBag.ValorMensaje = 0;
+                            ViewBag.MensajeProceso = "Producto no encontrado.";
+                            return View(producto);
+                        }
+                    }
+                }
+                else
+                {
+                    // Validar la extensión del archivo
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                    var extension = Path.GetExtension(ImagenProducto.FileName).ToLower();
+
+                    if (!allowedExtensions.Contains(extension))
+                    {
+                        ViewBag.ValorMensaje = 0;
+                        ViewBag.MensajeProceso = "Solo se permiten archivos de imagen (JPG, PNG, GIF).";
+                        return View(producto);
+                    }
+
+                    // Guardar el archivo en la carpeta "Images"
+                    var fileName = Path.GetFileName(ImagenProducto.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
+                    ImagenProducto.SaveAs(path);
+
+                    // Asignar la ruta de la imagen al modelo
+                    producto.ImgProducto = "/Content/Images/" + fileName;
+                    
+                }
+
                 using (FriendshipetEntities db = new FriendshipetEntities())
                 {
                     db.Database.ExecuteSqlCommand(
-                        "EXEC spActualizarProducto @IDProducto, @Precio, @NombreProducto, @TipoProducto, @NombreProveedor, @Stock",
+                        "EXEC spActualizarProducto @IDProducto, @Precio, @NombreProducto, @TipoProducto, @NombreProveedor, @Stock, @ImgProducto",
                         new SqlParameter("@IDProducto", producto.IDProducto),
                         new SqlParameter("@Precio", producto.Precio),
                         new SqlParameter("@NombreProducto", producto.NombreProducto.ToUpper()),
                         new SqlParameter("@TipoProducto", producto.Categoria.ToUpper()),
                         new SqlParameter("@NombreProveedor", producto.NombreProveedor),
-                        new SqlParameter("@Stock", producto.Stock)
+                        new SqlParameter("@Stock", producto.Stock),
+                        new SqlParameter("@ImgProducto", producto.ImgProducto)
                     );
 
                     ViewBag.ValorMensaje = 1;

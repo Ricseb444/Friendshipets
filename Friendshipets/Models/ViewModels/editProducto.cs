@@ -29,5 +29,9 @@ namespace Friendshipets.Models.ViewModels
         [Required]
         [Display(Name = "Precio Producto:")]
         public decimal Precio { get; set; }
+
+        public string ImgProducto { get; set; }
+
+        public HttpPostedFileBase ImagenArchivo { get; set; }
     }
 }
