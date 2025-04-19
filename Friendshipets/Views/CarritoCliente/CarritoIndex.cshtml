@@ -1,83 +1,86 @@
 ﻿@model List<Friendshipets.Models.ViewModels.cCarrito>
 @{
     ViewBag.Title = "Tu Carrito";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
 }
-
-<ol class="breadcrumb mb-4 mt-4">
-    <li class="breadcrumb-item"><a href="@Url.Action("Index","Tienda")">Tienda</a></li>
-    <li class="breadcrumb-item active">Carrito</li>
-</ol>
-<br />
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
-    </div>
-}
-
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
-}
-<div class="card shadow mb-4 mt-4">
-    <div class="card-header py-3 bg-second-primary">
-        <h6 class="m-0 font-weight-bold text-white">Tu Carrito de Compras</h6>
-    </div>
-    <div class="card-body">
-        @if (Model.Count > 0)
+<main>
+    <div class="container-fluid px-4">
+        
+        @if (TempData["SuccessMessage"] != null)
         {
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.NombreProducto</td>
-                            <td>₡@item.Precio</td>
-                            <td>
-                                <span>@item.Cantidad</span> <!-- Muestra la cantidad, pero no permite editarla -->
-                                <input type="hidden" name="idCarrito" value="@item.IDCarrito" />
-                                <input type="hidden" name="idProducto" value="@item.IDProducto" />
+            <br />
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <br />
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <div class="card shadow mb-4 mt-4">
+            <div class="card-header py-3 bg-second-primary">
+                <h6 class="m-0 font-weight-bold text-white">Tu Carrito de Compras</h6>
+            </div>
+            <div class="card-body">
+                @if (Model.Count > 0)
+                {
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.NombreProducto</td>
+                                    <td>₡@item.Precio</td>
+                                    <td>
+                                        <span>@item.Cantidad</span> <!-- Muestra la cantidad, pero no permite editarla -->
+                                        <input type="hidden" name="idCarrito" value="@item.IDCarrito" />
+                                        <input type="hidden" name="idProducto" value="@item.IDProducto" />
 
 
-                            </td>
-                            <td>₡@item.Total</td>
-                            <td>
-                                <form action="@Url.Action("EliminarProducto", "CarritoCliente")" method="post" style="display:inline;">
-                                    <input type="hidden" name="idProducto" value="@item.IDProducto" />
-                                    <input type="hidden" name="idCarrito" value="@item.IDCarrito" />
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p>@ViewBag.Mensaje</p>
-        }
+                                    </td>
+                                    <td>₡@item.Total</td>
+                                    <td>
+                                        <form action="@Url.Action("EliminarProducto", "CarritoCliente")" method="post" style="display:inline;">
+                                            <input type="hidden" name="idProducto" value="@item.IDProducto" />
+                                            <input type="hidden" name="idCarrito" value="@item.IDCarrito" />
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>@ViewBag.Mensaje</p>
+                }
+            </div>
+            <div class="card-footer">
+                @if (Model != null && Model.Any())
+                {
+                    // Usa el primer elemento de la lista para obtener IDCarrito
+                    var firstItem = Model.First();
+                    <a href="@Url.Action("ProcederPagar", "CarritoCliente", new { idCarrito = firstItem.IDCarrito})" class="btn btn-primary">Proceder a Pagar</a>
+                }
+                <a href="@Url.Action("Catalogo", "Catalogo")" class="btn btn-success">Seguir Comprando</a>
+            </div>
+        </div>
     </div>
-    <div class="card-footer">
-        @if (Model != null && Model.Any())
-        {
-            // Usa el primer elemento de la lista para obtener IDCarrito
-            var firstItem = Model.First();
-            <a href="@Url.Action("ProcederPagar", "CarritoCliente", new { idCarrito = firstItem.IDCarrito})" class="btn btn-primary">Proceder a Pagar</a>
-        }
-        <a href="@Url.Action("Catalogo", "Catalogo")" class="btn btn-success">Seguir Comprando</a>
-    </div>
-</div>
+</main>
+
+
 

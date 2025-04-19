@@ -51,9 +51,11 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="@Url.Action("Index", "MiPerfil")">Perfil</a></li>
                                 <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="@Url.Action("HistorialCompras", "Historial")">Historial Compras</a></li>
+                                <li><hr class="dropdown-divider" /></li>
                                 <li>
                                     <form class="d-flex" action="@Url.Action("Logout", "Auth")" method="post">
-                                        @*<span class="me-2">Hola, @nombreUsuario</span>*@
+                                        
                                         <button class="btn btn-light" type="submit">Cerrar Sesión</button>
                                     </form>
                                 </li>
@@ -102,19 +104,19 @@
     @Scripts.Render("~/bundles/complementos")    
     @RenderSection("scripts", required: false)
     <script>
-    $(document).ready(function () {
-        $.ajax({
-            url: '@Url.Action("ObtenerCantidadCarrito", "CarritoCliente")',
-            type: 'GET',
-            success: function (data) {
-                $('#cantidad-carrito').text(data);
-            },
-            error: function () {
-                console.error('No se pudo obtener la cantidad del carrito.');
-            }
+        $(document).ready(function () {
+            $.ajax({
+                url: '@Url.Action("ObtenerCantidadCarrito", "CarritoCliente")',
+                type: 'GET',
+                success: function (data) {
+                    $('#cantidad-carrito').text(data);
+                },
+                error: function () {
+                    console.error('No se pudo obtener la cantidad del carrito.');
+                }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
 

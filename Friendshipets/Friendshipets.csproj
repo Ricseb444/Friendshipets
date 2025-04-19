@@ -134,6 +134,7 @@
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\FacturacionController.cs" />
+    <Compile Include="Controllers\HistorialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MiPerfilController.cs" />
     <Compile Include="Controllers\PagosController.cs" />
@@ -617,6 +618,8 @@
     <Content Include="Views\Carrito\IndexDetalleCarritoCliente.cshtml" />
     <Content Include="Views\CarritoCliente\CarritoIndex.cshtml" />
     <Content Include="Views\Pagos\Index.cshtml" />
+    <Content Include="Views\Historial\HistorialCompras.cshtml" />
+    <Content Include="Views\Historial\ImprimirFactura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

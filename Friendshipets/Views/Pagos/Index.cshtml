@@ -2,90 +2,94 @@
 
 @{
     ViewBag.Title = "Método de Pago";
-
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
 }
-
 <link href="~/Content/estilos.css" rel="stylesheet" />
-<br />
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
-    </div>
-}
+<main>
+    <div class="container-fluid px-4">
+        
 
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
-}
-
-@*<div class="jumbotron">
-    <h1>Selecciona un Método de Pago</h1>
-    <p>Por favor, elige el método de pago para finalizar tu compra.</p>
-</div>*@
-<div class="card shadow mb-4 mt-4">
-    <div class="card-header py-3 bg-second-primary">
-        <h6 class="m-0 font-weight-bold text-white">Procesamiento del pago</h6>
-    </div>    
-    <form action="@Url.Action("ProcesarPago", "Pagos", new { idCarrito = Model.IDCarrito })" method="post">
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var producto in Model.Productos)
-                    {
-                        <tr>
-                            <td>@producto.NombreProducto</td>
-                            <td>@producto.Cantidad</td>
-                            <td>₡@producto.Total</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-            <p><strong>Monto Total:</strong> ₡@Model.MontoTotal</p>
-
-            <div class="form-group">
-                <label for="metodoPago">Método de Pago</label>
-                <select id="metodoPago" name="metodoPago" class="form-control">
-                    <option value="Sinpe">SINPE</option>
-                    <option value="Efectivo">Efectivo</option>
-                    <option value="Transferencia">Transferencia Bancaria</option>
-                </select>
-            </div>
+        @if (TempData["SuccessMessage"] != null)
+        {
             <br />
-        </div>
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Proceder con Pago</button>
-        </div>        
-    </form>    
-</div>
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
 
-<!-- Modal de Pago Exitoso -->
-<div id="successModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Pago Realizado con Éxito</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <br />
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
             </div>
-            <div class="modal-body">
-                <p>Gracias por tu compra. El pago fue exitoso.</p>
+        }
+
+        <div class="card shadow mb-4 mt-4">
+            <div class="card-header py-3 bg-second-primary">
+                <h6 class="m-0 font-weight-bold text-white">Procesamiento del pago</h6>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            <form action="@Url.Action("ProcesarPago", "Pagos", new { idCarrito = Model.IDCarrito })" method="post">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var producto in Model.Productos)
+                            {
+                                <tr>
+                                    <td>@producto.NombreProducto</td>
+                                    <td>@producto.Cantidad</td>
+                                    <td>₡@producto.Total</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <p><strong>Monto Total:</strong> ₡@Model.MontoTotal</p>
+
+                    <div class="form-group">
+                        <label for="metodoPago">Método de Pago</label>
+                        <select id="metodoPago" name="metodoPago" class="form-control">
+                            <option value="Sinpe">SINPE</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Transferencia">Transferencia Bancaria</option>
+                        </select>
+                    </div>
+                    <br />
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Proceder con Pago</button>
+                    <a href="@Url.Action("CarritoIndex", "CarritoCliente")" class="btn btn-success">Volver al Carrito</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal de Pago Exitoso -->
+        <div id="successModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pago Realizado con Éxito</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Gracias por tu compra. El pago fue exitoso.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</main>
+
 
 @section Scripts {
     <script>

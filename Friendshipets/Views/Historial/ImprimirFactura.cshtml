@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Imprimir Factura";
+    Layout = "~/Views/Shared/_LayoutTienda.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <ol class="breadcrumb mb-4 mt-4">
+            <li class="breadcrumb-item"><a href="@Url.Action("HistorialCompras","Historial")">Historial</a></li>
+            <li class="breadcrumb-item active">Detalle Compra</li>
+        </ol>
+
+        <div class="card shadow mb-4 mt-4">
+            <div class="card-header py-3 bg-second-primary">
+                <h6 class="m-0 font-weight-bold text-white">Detalles de la compra</h6>                
+            </div>
+            <div class="card-body">
+                @if (ViewBag.FacturaCadena != null)
+                {
+                    <div class="alert alert-success">
+                        <pre style="white-space: pre-wrap; word-wrap: break-word;">@ViewBag.FacturaCadena</pre>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        <strong>Error:</strong> No se pudieron cargar los detalles de la factura. Intente nuevamente.
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <a href="@Url.Action("HistorialCompras","Historial")" class="btn btn-success">
+                    Volver
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+
